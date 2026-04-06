@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+package proto.member;
+
+service Member {
+  // 根据 member id 查询 member 信息
+  rpc Info(MemberIdReq) returns (MemberInfo);
+}
+
+//用户ID请求
+message MemberIdReq {
+  optional uint32 member_id = 1;
+  optional bool through_cache = 2;
+}
+
+//多个用户id请求
+message MemberIdsReq {
+  repeated MemberIdReq member_ids = 1;
+}
+message MemberInfo {
+  // member_id。自增的用户唯一标识
+  optional uint32 id = 1;
+  // 用户 uuid，之前为分表设计，但没有发挥实际作用。未来会下掉的
+  optional string uuid = 2;
+  // 用户名。即之前的 username
+  optional string member_name = 3;
+  // 用户账号绑定的手机号
+  optional string tel = 4;
+  // 注册时间
+  optional uint32 created_time = 5;
+  // 小程序的 token
+  optional string mini_token = 6;
+  // 用户上传的头像
+  optional string headimgurl = 7;
+  // 找活名片头像（带审核）
+  optional ResumeAvatar avatar = 8;
+  // 带盐的密码 hash
+  optional string pwd = 12;
+}
+
+//多个用户信息
+message MembersInfo {
+  repeated MemberInfo member_info = 1;
+}
+
+enum ResumeAvatarCheckStatus {
+  RESUME_AVATAR_CHECK_STATUS_UNSPECIFIED = 0;
+  RESUME_AVATAR_CHECK_STATUS_NOT_CHECK = 1;  // 未审核
+  RESUME_AVATAR_CHECK_STATUS_SUCCESS_CHECK = 2;  // 审核通过
+  RESUME_AVATAR_CHECK_STATUS_FAIL_CHECK = 3;  // 审核失败
+}
+
+// 找活头像信息
+message ResumeAvatar {
+  optional uint32 id = 1;
+  // 用户 id
+  optional uint32 member_id = 2;
+  // 找活头像 url
+  optional string avatar = 3;
+  // 找活头像审核状态
+  optional ResumeAvatarCheckStatus status = 4;
+  // 审核时间
+  optional uint32 check_time = 5;
+  // 找活头像创建时间
+  optional uint32 create_time = 6;
+  // 最后一次更新时间
+  optional uint32 update_time = 7;
+}

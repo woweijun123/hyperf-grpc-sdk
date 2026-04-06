@@ -1,0 +1,22 @@
+syntax = "proto3";
+//项目若需要添加子集模块proto文件的结构示例
+//格式："proto.服务目录名称.子目录名称"，禁止使用下划线(包名需和目录名称一致)
+package proto.example.submodule;
+
+//注释
+service Demo {
+  //方法注释
+  rpc Hello (HelloReq) returns (HelloResp) {}
+}
+
+//结构注释
+message HelloReq {
+  //字段注释
+  string message = 1;
+}
+
+//结构注释
+message HelloResp {
+  //字段注释
+  string message = 1;
+}

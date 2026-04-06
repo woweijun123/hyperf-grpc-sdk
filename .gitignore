@@ -1,0 +1,9 @@
+/vendor/
+composer.lock
+*.cache
+*.log
+.idea
+.github/
+/src/Proto/
+/src/Grpc/
+/src/GPBMetadata/

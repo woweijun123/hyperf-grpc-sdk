@@ -1,0 +1,12 @@
+stages:
+  - update_composer
+
+update_to_compsoer:
+  stage: update_composer
+  script:
+    - curl --request PUT http://172.17.39.10:8888/repositories/27-0906df4ef9619e0a7305d1411ead35e7c9606f1e
+  only:
+    - tags
+  tags:
+    - k8s-test
+

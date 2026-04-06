@@ -1,0 +1,44 @@
+{
+  "name": "riven/hyperf-grpc-sdk",
+  "type": "library",
+  "license": "MIT",
+  "keywords": [
+    "php",
+    "hyperf"
+  ],
+  "description": "GRPC调用SDK",
+  "autoload": {
+    "psr-4": {
+      "Proto\\": "src/Proto",
+      "Grpc\\": "src/Grpc",
+      "GPBMetadata\\": "src/GPBMetadata",
+      "GrpcSdk\\": "src/"
+    }
+  },
+  "require": {
+    "php": ">=7.3",
+    "hyperf/code-generator": "^0.3.3",
+    "hyperf/config": "~2.2.0",
+    "hyperf/grpc": "^3.1"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "config": {
+    "optimize-autoloader": true,
+    "sort-packages": true,
+    "secure-http": false
+  },
+  "scripts": {
+    "pre-autoload-dump": [
+      "php build.php"
+    ],
+    "test": "phpunit -c phpunit.xml --colors=always",
+    "analyse": "phpstan analyse --memory-limit 1024M -l 0 ./src",
+    "cs-fix": "php-cs-fixer fix $1"
+  },
+  "extra": {
+    "hyperf": {
+      "config": "GrpcSdk\\ConfigProvider"
+    }
+  }
+}
