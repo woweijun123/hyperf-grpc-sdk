@@ -1,0 +1,20 @@
+syntax = "proto3"; // 必须声明使用 proto3 语法
+
+package proto.room;  // 命名空间，防止冲突
+
+// 麦位单个节点
+message Mic {
+    int32 p = 1;  // 1 是标识符(Tag)，一旦定义不可更改
+    int32 ls = 2; // 是否锁麦
+    int64 u = 3;  // 用户ID
+    int32 s = 4;  // 开麦状态
+}
+
+// 房间全量数据包
+message RoomData {
+    repeated Mic mi = 1;      // repeated 表示数组/列表
+    repeated int64 ei = 2;    // 用户进入信息
+    string rn = 3;            // 房间名称
+    int32 hr = 4;             // 小时榜
+    string padding = 5;       // 如果你需要补齐4000字节，可以用这个字段
+}
