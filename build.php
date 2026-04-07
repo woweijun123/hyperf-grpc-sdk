@@ -13,11 +13,22 @@ $baseDir = __DIR__;
 $protoDir = "{$baseDir}/src/protobuf";
 $outputDir = "{$baseDir}/src";
 
-// 构建所有匹配的.proto文件的通配符表达式
-$protoFilesPattern = "{$protoDir}/**/*.proto";
+// 使用 find 命令递归查找所有的 .proto 文件
+$protoFiles = shell_exec("find {$protoDir} -type f -name '*.proto'");
 
-// 使用单个shell_exec调用来处理所有的.proto文件
-exec("protoc -I {$protoDir} --php_out={$outputDir} {$protoFilesPattern}");
+// 将找到的 .proto 文件路径转换为数组
+$protoFilesArray = explode("\n", trim($protoFiles));
+
+// 构建 protoc 命令
+$protocCommand = "protoc -I {$protoDir} --php_out={$outputDir}";
+foreach ($protoFilesArray as $file) {
+    if (!empty($file)) {
+        $protocCommand .= " {$file}";
+    }
+}
+
+// 执行 protoc 命令
+exec($protocCommand);
 // 执行额外的配置文件格式化
 exec("php {$baseDir}/format_config.php");
 echo 'Build Protobuf Success' . PHP_EOL;
