@@ -1,6 +1,9 @@
 syntax = "proto3";
 
 package proto.member;
+// --- PHP 导出配置 ---
+option php_namespace = "GrpcSdk\\Proto";
+option php_metadata_namespace = "GrpcSdk\\GPBMetadata";
 
 service Member {
   // 根据 member id 查询 member 信息

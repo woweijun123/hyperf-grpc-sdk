@@ -9,9 +9,6 @@
   "description": "GRPC调用SDK",
   "autoload": {
     "psr-4": {
-      "Proto\\": "src/Proto",
-      "Grpc\\": "src/Grpc",
-      "GPBMetadata\\": "src/GPBMetadata",
       "GrpcSdk\\": "src/"
     }
   },

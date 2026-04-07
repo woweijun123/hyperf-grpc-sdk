@@ -1,5 +1,8 @@
 syntax = "proto3";
 
 package proto;
+// --- PHP 导出配置 ---
+option php_namespace = "GrpcSdk\\Proto";
+option php_metadata_namespace = "GrpcSdk\\GPBMetadata";
 
 message EmptyReq{}
