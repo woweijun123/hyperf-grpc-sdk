@@ -9,9 +9,15 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-$path =__DIR__ ;
-shell_exec("protoc -I {$path}/src/protobuf/  --php_out={$path}/src/ --hyperf_out={$path}/src/    {$path}/src/protobuf/**/**/*.proto");
-shell_exec("protoc -I {$path}/src/protobuf/  --php_out={$path}/src/ --hyperf_out={$path}/src/    {$path}/src/protobuf/**/**/**/*.proto");
-shell_exec("protoc -I {$path}/src/protobuf/  --php_out={$path}/src/ --hyperf_out={$path}/src/    {$path}/src/protobuf/**/*.proto");
-shell_exec("php {$path}/format_config.php");
+$baseDir = __DIR__;
+$protoDir = "{$baseDir}/src/protobuf";
+$outputDir = "{$baseDir}/src";
+
+// 构建所有匹配的.proto文件的通配符表达式
+$protoFilesPattern = "{$protoDir}/**/*.proto";
+
+// 使用单个shell_exec调用来处理所有的.proto文件
+exec("protoc -I {$protoDir} --php_out={$outputDir} {$protoFilesPattern}");
+// 执行额外的配置文件格式化
+exec("php {$baseDir}/format_config.php");
 echo 'Build Protobuf Success' . PHP_EOL;
