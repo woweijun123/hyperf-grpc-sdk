@@ -27,7 +27,15 @@ foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($protoDir)
     $files[] = escapeshellarg($path);
 }
 
-// 3. 编译并自动归位
-exec("protoc -I $src --php_out=$src " . implode(' ', $files));
+// 3. 编译：输出到根目录（会生成 ./GrpcSdk/...）
+if ($files ?? []) {
+    exec("protoc -I $src --php_out=" . __DIR__ . " " . implode(' ', $files));
+
+    // 4. 自动归位：抹掉 GrpcSdk 这一层，直接放进 src
+    if (is_dir($gen = __DIR__ . '/GrpcSdk')) {
+        // 将 GrpcSdk/Proto 移至 src/Proto，GrpcSdk/GPBMetadata 移至 src/GPBMetadata
+        exec("cp -R $gen/* $src && rm -rf $gen");
+    }
+}
 
 echo "Build Success\n";
