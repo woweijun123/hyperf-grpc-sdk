@@ -1,6 +1,6 @@
 syntax = "proto3";
 option php_namespace = "GrpcSdk\\Proto\\Room";
-option php_metadata_namespace = "GrpcSdk\\GPBMetadata\\Room"; // 必须声明使用 proto3 语法
+option php_metadata_namespace = "GrpcSdk\\GPBMetadata\\Room";
 
 package protobuf.room;
 
