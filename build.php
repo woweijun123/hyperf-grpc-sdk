@@ -19,7 +19,7 @@ foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($protoDir)
     }
 
     // 2. 注入配置 (Namespace 必须包含 GrpcSdk 才能匹配 PSR-4)
-    $opt = "\noption php_namespace = \"Proto$ns\";\noption php_metadata_namespace = \"GPBMetadata$ns\";";
+    $opt = "\noption php_namespace = \"GrpcSdk\\\\\\\\Proto$ns\";\noption php_metadata_namespace = \"GrpcSdk\\\\\\\\GPBMetadata$ns\";";
     $content = file_get_contents($path);
     if (!str_contains($content, 'option php_namespace')) {
         file_put_contents($path, preg_replace('/^(package|syntax).+;/m', "$0$opt", $content, 1));

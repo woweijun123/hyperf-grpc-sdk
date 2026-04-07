@@ -1,6 +1,6 @@
 syntax = "proto3";
-option php_namespace = "Proto\\Example\\Submodule";
-option php_metadata_namespace = "GPBMetadata\\Example\\Submodule";
+option php_namespace = "GrpcSdk\\Proto\\Example\\Submodule";
+option php_metadata_namespace = "GrpcSdk\\GPBMetadata\\Example\\Submodule";
 //项目若需要添加子集模块proto文件的结构示例
 //格式："protobuf.服务目录名称.子目录名称"，禁止使用下划线(包名需和目录名称一致)
 package protobuf.example.submodule;

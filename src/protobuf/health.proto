@@ -16,8 +16,8 @@
 // https://github.com/grpc/grpc-proto/blob/master/grpc/health/v1/health.proto
 // 该文件为官方grpc健康检查，请注意不能修改该文件，该文件比较特殊，不具备参考性
 syntax = "proto3";
-option php_namespace = "Proto";
-option php_metadata_namespace = "GPBMetadata";
+option php_namespace = "GrpcSdk\\Proto";
+option php_metadata_namespace = "GrpcSdk\\GPBMetadata";
 
 package grpc.health.v1;
 

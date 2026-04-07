@@ -1,6 +1,6 @@
 syntax = "proto3";
-option php_namespace = "Proto";
-option php_metadata_namespace = "GPBMetadata";
+option php_namespace = "GrpcSdk\\Proto";
+option php_metadata_namespace = "GrpcSdk\\GPBMetadata";
 
 package proto;
 
