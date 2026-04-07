@@ -9,22 +9,36 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-$baseDir = __DIR__;
-$protoDir = "{$baseDir}/src";
-$outputDir = "{$baseDir}/src";
+$path = __DIR__ . '/src';
+$protoDir = $path . '/protobuf';
 
 // 使用 find 命令递归查找所有的 .proto 文件
-$protoFiles = shell_exec("find {$protoDir} -type f -name '*.proto'");
+$protoFiles = shell_exec("find {$path} -type f -name '*.proto'");
 
 // 将找到的 .proto 文件路径转换为数组
 $protoFilesArray = explode("\n", trim($protoFiles));
 
 // 定义需要添加的选项
 $namespaceOptionsTemplate = <<<'EOT'
-// --- PHP 导出配置 ---
-option php_namespace = "GrpcSdk\\\\Proto\\\\%s";
-option php_metadata_namespace = "GrpcSdk\\\\GPBMetadata\\\\%s";
+option php_namespace = "GrpcSdk\\\\Proto%s";
+option php_metadata_namespace = "GrpcSdk\\\\GPBMetadata%s";
 EOT;
+
+// 辅助函数：将字符串转换为驼峰命名法
+function camel_case(string $str): string
+{
+    return lcfirst(str_replace(' ', '', ucwords(str_replace('_', ' ', $str))));
+}
+
+// 辅助函数：将路径转换为大驼峰命名法
+function convertToPascalCase(string $path): string
+{
+    $parts = explode('/', $path);
+    $pascalCaseParts = array_map(function ($part) {
+        return ucfirst(camel_case($part));
+    }, $parts);
+    return implode('\\', $pascalCaseParts);
+}
 
 // 遍历每个 .proto 文件并添加选项
 foreach ($protoFilesArray as $file) {
@@ -36,8 +50,13 @@ foreach ($protoFilesArray as $file) {
         $relativePath = substr($file, strlen($protoDir) + 1);
         $directoryPath = dirname($relativePath);
 
-        // 将目录路径转换为命名空间
-        $namespace = str_replace('/', '\\', $directoryPath);
+        // 如果是根目录下的文件，则设置命名空间为 "GrpcSdk\Proto"
+        if ($directoryPath === '.') {
+            $namespace = '';
+        } else {
+            // 将目录路径转换为大驼峰命名法
+            $namespace = '\\\\' . convertToPascalCase($directoryPath);
+        }
 
         // 生成具体的选项
         $namespaceOptions = sprintf($namespaceOptionsTemplate, $namespace, $namespace);
@@ -45,8 +64,7 @@ foreach ($protoFilesArray as $file) {
         // 检查是否已经包含选项
         if (strpos($content, 'option php_namespace') === false) {
             // 在 package 之后插入选项
-            $content = preg_replace('/(package\s+[^;]+;)/', '$1' . "\n" . $namespaceOptions, $content);
-
+            $content = preg_replace('/^package\s+[^;]+;$/m', '$0' . "\n" . $namespaceOptions, $content);
             // 写回文件
             file_put_contents($file, $content);
         }
@@ -54,7 +72,7 @@ foreach ($protoFilesArray as $file) {
 }
 
 // 构建 protoc 命令
-$protocCommand = "protoc -I {$protoDir} --php_out={$outputDir}";
+$protocCommand = "protoc -I {$path} --php_out={$path}";
 foreach ($protoFilesArray as $file) {
     if (!empty($file)) {
         $protocCommand .= " {$file}";

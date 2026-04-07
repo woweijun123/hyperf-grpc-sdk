@@ -2,9 +2,6 @@ syntax = "proto3";
 
 //格式："protobuf.服务目录名称.子目录名称"，禁止使用下划线(包名需和目录名称一致)
 package protobuf.example;
-// --- PHP 导出配置 ---
-option php_namespace = "GrpcSdk\\Proto";
-option php_metadata_namespace = "GrpcSdk\\GPBMetadata";
 
 //示例User,和业务member没有关系
 service User {
