@@ -1,12 +1,12 @@
 syntax = "proto3";
 
-//package格式："proto.服务目录名称.子目录名称"，禁止使用下划线(包名需和目录名称一致)
-package proto.example;
+//package格式："protobuf.服务目录名称.子目录名称"，禁止使用下划线(包名需和目录名称一致)
+package protobuf.example;
 // --- PHP 导出配置 ---
 option php_namespace = "GrpcSdk\\Proto";
 option php_metadata_namespace = "GrpcSdk\\GPBMetadata";
-import "proto/example/user.proto";    //若引用外部proto文件，使用文件包名+文件名;
-import "proto/member/member.proto";          //若引用外部proto文件，使用文件包名+文件名;
+import "protobuf/example/user.proto";    //若引用外部proto文件，使用文件包名+文件名;
+import "protobuf/member/member.proto";          //若引用外部proto文件，使用文件包名+文件名;
 
 //消息示例
 service Message {
@@ -31,7 +31,7 @@ message SendMsgResp{
   //状态内容
   optional int32 msg = 2;
   //示例引用外部结构，若使用跨包名的proto文件数据结构，需要添加包前缀
-  optional proto.member.MemberInfo member_info = 3;
+  optional protobuf.member.MemberInfo member_info = 3;
 }
 
 

@@ -10,7 +10,7 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 $baseDir = __DIR__;
-$protoDir = "{$baseDir}/src/protobuf";
+$protoDir = "{$baseDir}/src";
 $outputDir = "{$baseDir}/src";
 
 // 使用 find 命令递归查找所有的 .proto 文件
@@ -20,10 +20,10 @@ $protoFiles = shell_exec("find {$protoDir} -type f -name '*.proto'");
 $protoFilesArray = explode("\n", trim($protoFiles));
 
 // 定义需要添加的选项
-$namespaceOptions = <<<'EOT'
+$namespaceOptionsTemplate = <<<'EOT'
 // --- PHP 导出配置 ---
-option php_namespace = "GrpcSdk\\\\Proto";
-option php_metadata_namespace = "GrpcSdk\\\\GPBMetadata";
+option php_namespace = "GrpcSdk\\\\Proto\\\\%s";
+option php_metadata_namespace = "GrpcSdk\\\\GPBMetadata\\\\%s";
 EOT;
 
 // 遍历每个 .proto 文件并添加选项
@@ -31,6 +31,16 @@ foreach ($protoFilesArray as $file) {
     if (!empty($file)) {
         // 读取文件内容
         $content = file_get_contents($file);
+
+        // 获取文件相对于 protoDir 的相对路径
+        $relativePath = substr($file, strlen($protoDir) + 1);
+        $directoryPath = dirname($relativePath);
+
+        // 将目录路径转换为命名空间
+        $namespace = str_replace('/', '\\', $directoryPath);
+
+        // 生成具体的选项
+        $namespaceOptions = sprintf($namespaceOptionsTemplate, $namespace, $namespace);
 
         // 检查是否已经包含选项
         if (strpos($content, 'option php_namespace') === false) {
