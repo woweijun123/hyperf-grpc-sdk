@@ -1,16 +1,8 @@
 # Grpc-SDK
-
-相关使用场景请查看：https://w3nu1yaadv.feishu.cn/docs/doccnTUy4gmxzlMeYu0jrjmJoAh
-编写规范请查看：https://w3nu1yaadv.feishu.cn/docs/doccnBtW3ej4qRPLhQQZX5kgG9g
-
 ## 前言
 - 使用该包,由于需要对proto文件动态build,你开发环境中必须要有以下依赖
-```bash
-- protoc                  ##官方protoc
-- Protobuf                ##PHP 扩展（如果需要使用客户端的gRPC Server）
-- protoc-gen-hyperf 插件   ##使用说明：https://w3nu1yaadv.feishu.cn/docs/doccnWUXmXMQXUGuom70zC9HXSp
-
-```
+  - protoc 官方protoc
+  - Protobuf PHP 扩展（如果需要使用客户端的gRPC Server）
 
 ### 运行命令
 ```bash
@@ -69,7 +61,6 @@ if (is_dir($path)) {
 
 ```php
     /**
-     * User: ZeMing Shao
      * @return string
      * @throws \Exception
      */
@@ -96,17 +87,16 @@ if (is_dir($path)) {
 ├── README.md
 ├── composer.json
 ├── composer.lock
-├── format_config.php                                
+├── format_config.php
 ├── phpunit.xml
 ├── publish
-│   └── grpc.php                               #各个服务配置文件，会根据各个服务的目录名称在构建后自动写入配置文件
+│   └── grpc.php # 各个服务配置文件，会根据各个服务的目录名称在构建后自动写入配置文件
 ├── src
-│   ├── ConfigProvider.php                     
-│   └── protobuf
-│       └── proto                              #该目录为所有proto总目录，所有服务proto文件都应该写在其中
-│           └── example                 #各个服务之间应该目录隔离(注意目录名称：多个单词请使用小驼峰写法书写，禁止使用下划线(包名需和目录名称一致))
-│               ├── message.proto              #各个服务业务的proto文件，命名尽量以业务功能命名
-│               └── user.proto
+│   ├── ConfigProvider.php
+│   └── protobuf # 该目录为所有proto总目录，所有服务proto文件都应该写在其中
+│       └── example # 各个服务之间应该目录隔离(注意目录名称：多个单词请使用小驼峰写法书写，禁止使用下划线(包名需和目录名称一致)) 
+│           ├── message.proto # 各个服务业务的proto文件，命名尽量以业务功能命名
+│           └── user.proto
 └── vendor
 
 ```
@@ -126,12 +116,11 @@ if (is_dir($path)) {
 │   └── grpc.php
 ├── src
 │   ├── ConfigProvider.php
-│   ├── GPBMetadata                                   //生成的文件，不允许提交到git
-│   │   └── Proto
-│   │       └── Example
-│   │           ├── Message.php
-│   │           └── User.php
-│   ├── Proto                                          //生成的文件，不允许提交到git
+│   ├── GPBMetadata # 生成的文件，不允许提交到git
+│   │   └── Example
+│   │       ├── Message.php
+│   │       └── User.php
+│   ├── Proto # 生成的文件，不允许提交到git
 │   │   └── Example
 │   │       ├── HiReply.php
 │   │       ├── HiUser.php
@@ -144,10 +133,9 @@ if (is_dir($path)) {
 │   │       ├── UserGrpcInterface.php
 │   │       └── UserGrpcRoute.php
 │   └── protobuf
-│       └── proto
-│           └── example
-│               ├── message.proto
-│               └── user.proto
+│       └── example
+│           ├── message.proto
+│           └── user.proto
 └── vendor
 
 ```
@@ -159,7 +147,7 @@ if (is_dir($path)) {
 git fetch origin
 git checkout  -b  feature/xxxx prod
 ```
-2. 按规范编写proto文件，并进行评审。
+2. 按规范编写proto文件。
 3. 执行composer dump-autoload 查看build.php文件是否符合预期。
 4. grpc服务项目修改composer.json，将本包以path方式进行本地软链映射。
 ```yaml
