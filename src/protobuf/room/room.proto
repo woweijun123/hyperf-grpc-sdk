@@ -18,17 +18,6 @@ message ContributionBoard {
   int32 m = 2;  // 贡献钻石 (Money/Medal)
 }
 
-// 腾讯IM属性项
-message GroupAttr {
-  string key = 1;   // 属性key
-  string value = 2; // 属性value
-}
-
-// 腾讯IM请求结构
-message TencentIMRequest {
-  repeated GroupAttr GroupAttr = 1; // 属性列表
-}
-
 // 房间麦位信息请求
 message RoomMicRequest {
   repeated Mic mi = 1;       // 9个麦位信息
