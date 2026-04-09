@@ -6,17 +6,60 @@ package protobuf.room;
 
 // 麦位单个节点
 message Mic {
-    int32 p = 1;  // 1 是标识符(Tag)，一旦定义不可更改
-    int32 ls = 2; // 是否锁麦
-    int64 u = 3;  // 用户ID
-    int32 s = 4;  // 开麦状态
+  int32 p = 1;  // 麦位 (Position) 0-8
+  int32 ls = 2; // 是否锁麦 (Lock Status) 0-不锁 1-锁
+  int64 u = 3;  // 上麦用户id (User ID)
+  int32 s = 4;  // 开麦状态 (Status) 0-关闭 1-打开
 }
 
-// 房间全量数据包
-message RoomData {
-    repeated Mic mi = 1;      // repeated 表示数组/列表
-    repeated int64 ei = 2;    // 用户进入信息
-    string rn = 3;            // 房间名称
-    int32 hr = 4;             // 小时榜
-    string padding = 5;       // 如果你需要补齐4000字节，可以用这个字段
+// 贡献人信息
+message ContributionBoard {
+  int64 u = 1;  // 用户ID
+  int32 m = 2;  // 贡献钻石 (Money/Medal)
+}
+
+// 腾讯IM属性项
+message GroupAttr {
+  string key = 1;   // 属性key
+  string value = 2; // 属性value
+}
+
+// 腾讯IM请求结构
+message TencentIMRequest {
+  repeated GroupAttr GroupAttr = 1; // 属性列表
+}
+
+// 房间麦位信息请求
+message RoomMicRequest {
+  repeated Mic mi = 1;       // 9个麦位信息
+}
+
+// 房间公告请求
+message RoomAnnouncementRequest {
+  string an = 1;             // 公告内容
+}
+
+// 房间名称请求
+message RoomNameRequest {
+  string rn = 1;             // 房间名称
+}
+
+// 房间背景请求
+message RoomBackgroundRequest {
+  string rb = 1;             // 房间背景
+}
+
+// 房间标签请求
+message RoomTagRequest {
+  string rt = 1;             // 房间标签
+}
+
+// 贡献榜请求
+message ContributionBoardRequest {
+  repeated ContributionBoard cb = 1;  // 3个贡献人
+}
+
+// 小时榜请求
+message HourlyRankRequest {
+  int32 hr = 1;              // 小时榜排名
 }
