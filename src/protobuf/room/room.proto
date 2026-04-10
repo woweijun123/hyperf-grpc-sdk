@@ -6,49 +6,50 @@ package protobuf.room;
 
 // 房间麦位信息请求
 message RoomMic {
-  repeated Mic mi = 1;       // 9个麦位信息
+  repeated Mic mic_positions = 1;       // 9个麦位信息
 }
 
 // 麦位单个节点
 message Mic {
-  int32 p = 1;  // 麦位 (Position) 0-8
-  int32 ls = 2; // 是否锁麦 (Lock Status) 0-不锁 1-锁
-  int64 u = 3;  // 上麦用户id (User ID)
-  int32 s = 4;  // 开麦状态 (Status) 0-关闭 1-打开
+  int32 mic_pos = 1;  // 麦位 (Position) 0-8
+  int32 is_lock_mic = 2; // 是否锁麦 (Lock Status) 0-否 1-是
+  int64 user_id = 3;  // 上麦用户id (User ID)
+  int32 is_open_mic = 4;  // 开麦状态 (Status) 0-关闭 1-打开
+  int32 is_forbidden_mic = 5;  // 是否禁麦 (Status) 0-否 1-是
 }
 
 // 房间公告请求
-message RoomAnnouncement {
-  string an = 1;             // 公告内容
+message Notification {
+  string notification = 1; // 通知消息内容
 }
 
 // 房间名称请求
-message RoomName {
-  string rn = 1;             // 房间名称
+message Name {
+  string name = 1; // 房间名称
 }
 
 // 房间背景请求
-message RoomBackground {
-  string rb = 1;             // 房间背景
+message Background {
+  string background_url = 1; // 房间背景
 }
 
 // 房间标签请求
-message RoomTag {
-  string rt = 1;             // 房间标签
+message Tag {
+  string tag = 1; // 房间标签
 }
 
 // 贡献榜请求
-message ContributionBoards {
-  repeated ContributionBoard cb = 1;  // 3个贡献人
+message Contributes {
+  repeated Contribute contribute = 1; // 3个贡献人
 }
 
 // 贡献人信息
-message ContributionBoard {
-  int64 u = 1;  // 用户ID
-  int32 m = 2;  // 贡献钻石 (Money/Medal)
+message Contribute {
+  int64 user_id = 1;  // 用户ID
+  int32 amount = 2; // 贡献钻石 (Money/Medal)
 }
 
 // 小时榜请求
 message HourlyRank {
-  int32 hr = 1;              // 小时榜排名
+  int32 hourly_rank = 1; // 小时榜排名
 }
