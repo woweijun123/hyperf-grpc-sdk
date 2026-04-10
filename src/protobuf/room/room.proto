@@ -5,8 +5,8 @@ option php_metadata_namespace = "GrpcSdk\\GPBMetadata\\Room";
 package protobuf.room;
 
 // 房间麦位信息请求
-message RoomMic {
-  repeated Mic mic_positions = 1;       // 9个麦位信息
+message Mics {
+  repeated Mic mic_positions = 1; // 9个麦位信息
 }
 
 // 麦位单个节点
@@ -40,7 +40,7 @@ message Tag {
 
 // 贡献榜请求
 message Contributes {
-  repeated Contribute contribute = 1; // 3个贡献人
+  repeated Contribute contributes = 1; // 3个贡献人
 }
 
 // 贡献人信息
