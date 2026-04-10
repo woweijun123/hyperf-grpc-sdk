@@ -30,7 +30,7 @@ message Name {
 
 // 房间背景请求
 message Background {
-  string background_url = 1; // 房间背景
+  string background = 1; // 房间背景
 }
 
 // 房间标签请求
