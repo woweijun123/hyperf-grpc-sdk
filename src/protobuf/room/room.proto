@@ -34,8 +34,8 @@ message Background {
 }
 
 // 房间标签请求
-message Tag {
-  optional string tag = 1; // 房间标签
+message Tags {
+  repeated string tags = 1; // 房间标签
 }
 
 // 贡献榜请求
