@@ -16,6 +16,7 @@ message Mic {
   optional int32 is_lock_mic = 3; // 是否锁麦 (Lock Status) 0-否 1-是
   optional int32 is_open_mic = 4;  // 开麦状态 (Status) 0-关闭 1-打开
   optional int32 is_forbidden_mic = 5;  // 是否禁麦 (Status) 0-否 1-是
+  optional int32 amount = 6; // 贡献钻石 (Money/Medal)
 }
 
 // 房间公告请求
