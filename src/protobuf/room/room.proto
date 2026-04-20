@@ -54,3 +54,8 @@ message Contribute {
 message HourlyRank {
   optional int32 hourly_rank = 1; // 小时榜排名
 }
+
+// 其他信息
+message OtherInfo {
+  optional int32 public_screen = 1; // 公屏开关 0:开启 1:关闭
+}
