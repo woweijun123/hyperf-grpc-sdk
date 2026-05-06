@@ -6,6 +6,7 @@
     "php",
     "hyperf"
   ],
+  "homepage": "https://github.com/woweijun123/hyperf-grpc-sdk",
   "description": "GRPC调用SDK",
   "autoload": {
     "psr-4": {
