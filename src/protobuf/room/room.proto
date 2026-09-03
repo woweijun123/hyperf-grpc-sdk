@@ -64,4 +64,11 @@ message Managers {
 // 其他信息
 message OtherInfo {
   optional int32 public_screen = 1; // 公屏开关 0:开启 1:关闭
+  optional int32 mic_mode = 2; // 上麦模式 1:排麦模式 2:自由麦模式
+}
+
+// 音乐播放器浮窗触发事件
+message MusicFloating {
+  optional int64 source_user_id = 1; // 触发用户ID
+  optional int64 event_id = 2; // 事件ID（毫秒时间戳）
 }
