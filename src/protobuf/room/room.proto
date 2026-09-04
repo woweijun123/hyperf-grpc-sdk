@@ -65,6 +65,7 @@ message Managers {
 message OtherInfo {
   optional int32 public_screen = 1; // 公屏开关 0:开启 1:关闭
   optional int32 mic_mode = 2; // 上麦模式 1:排麦模式 2:自由麦模式
+  optional int32 queue_count = 3; // 排麦人数
 }
 
 // 音乐播放器浮窗触发事件
