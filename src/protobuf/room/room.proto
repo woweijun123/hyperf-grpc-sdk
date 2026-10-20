@@ -75,8 +75,5 @@ message HatInfo {
   int32 enabled = 1; // 0 关闭，1 开启。
   int64 user_id = 2; // 当前拥有者；0 表示没有达到第一档的用户。
   int32 level = 3; // 0 无帽子；1、2、3 对应配置档位。
-  int64 version = 4; // 帽子状态变更版本。
-  int64 updated_at = 5; // 与整份麦位快照相同的房内递增版本。
-  int64 event_sequence = 6; // 入房或重连的通知基线，历史序号不补播。
-  string image_url = 7; // 当前档位图片的完整 CDN URL；无帽子或未配置时为空。
+  string image_url = 4; // 当前档位图片的完整 CDN URL；无帽子或未配置时为空。
 }
