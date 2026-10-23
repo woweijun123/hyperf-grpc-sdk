@@ -68,6 +68,7 @@ message OtherInfo {
   optional int32 mic_mode = 2; // 上麦模式 1:排麦模式 2:自由麦模式
   optional int32 queue_count = 3; // 排麦人数
   optional int32 mic_count_reset_mode = 4; // 麦位计数重置方式：1 手动，2 每日。
+  optional int32 hat_mode_available = 5; // 本场帽子玩法是否可用：0 否，1 是；所有用户一致，移出名单保留至本场结束。
 }
 
 // HatInfo 是会话当前帽子状态；快照只恢复状态，不重播公屏和历史动效。
