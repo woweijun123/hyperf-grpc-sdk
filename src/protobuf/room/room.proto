@@ -19,6 +19,14 @@ message Mic {
   optional int32 amount = 6; // 贡献钻石 (Money/Medal)
   optional int64 updated_at = 7; // 麦位变更毫秒时间戳
   optional int64 music_floating = 8; // 音乐飘屏事件毫秒时间戳，0:无
+  repeated MicRelationship relationships = 9; // 当前麦位的挚友关系；空列表清除标识，多段关系全部返回。
+}
+
+// 同房间同时在麦的有效挚友关系，特效资源按 relation_type 从已发布配置读取。
+message MicRelationship {
+  int64 relation_id = 1; // 挚友关系 ID，同一对麦位上的双方使用相同 ID。
+  int32 relation_type = 2; // 挚友关系类型，与客户端挚友配置的 relation_type 一致。
+  int32 peer_mic_pos = 3; // 对方麦位，取值 0—8；0 是有效麦位。
 }
 
 // 房间公告请求
