@@ -86,3 +86,8 @@ message HatInfo {
   int32 level = 3; // 0 无帽子；1、2、3 对应配置档位。
   string image_url = 4; // 当前档位图片的完整 CDN URL；无帽子或未配置时为空。
 }
+
+// 自定义房间封面；未设置时返回空字符串，不回退房主头像。
+message Cover {
+  string cover_url = 1; // 完整 CDN 地址，与 HTTP 返回的 cover_url 一致。
+}
