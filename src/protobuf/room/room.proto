@@ -72,7 +72,7 @@ message Managers {
 
 // 房间当前冠名与常驻状态；前三个字段全为 0 表示无生效冠名。
 message NamingInfo {
-  int64 user_id = 1; // 被冠名用户玩家号 users.code。
+  int64 user_id = 1; // 被冠名用户 ID，对应 users.id。
   int64 start_at = 2; // 冠名开始时间，UTC 秒级 Unix 时间戳。
   int64 end_at = 3; // 冠名结束时间，UTC 秒级 Unix 时间戳。
   int32 is_resident = 4; // 当前会话是否为常驻房：0 否，1 是。
